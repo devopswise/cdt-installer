@@ -11,7 +11,7 @@ RUN pip install awscli ansible==2.4.0
 
 ENV PATH="${PATH}:/"
 
-COPY dwtools /dwtools
+COPY cdt /cdt
 
 ENTRYPOINT ["/bin/bash","-c"]
 CMD ["sleep infinity"]

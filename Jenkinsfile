@@ -11,7 +11,7 @@ node('jenkins-python-slave') {
     stage('Build image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
-        app = docker.build("devopswise/dwtools-installer")
+        app = docker.build("devopswise/cdt-installer")
     }
 
     stage('Push image') {
