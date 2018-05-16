@@ -5,7 +5,7 @@ if [[ -z "${CDT_BRANCH}" ]]; then
 fi
 
 if [[ -z "${CDT_GIT_URL}" ]]; then
-  CDT_GIT_URL="https://github.com/devopswise/dwtools.git"
+  CDT_GIT_URL="https://github.com/devopswise/cdt.git"
 fi
 
 
