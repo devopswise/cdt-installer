@@ -237,10 +237,14 @@ terminate() {
   fi
 }
 
+
 ssh_connect() {
   if [ -f ${CDT_SOURCE_DIR}/.aws-config ]; then
     . ${CDT_SOURCE_DIR}/.aws-config
-    ssh -i ${PEM_FILE} centos@${SERVER_FQDN}
+    if [ -f /root/.ssh/known_hosts ]; then
+      ssh-keygen -f "/root/.ssh/known_hosts" -R ${SERVER_FQDN}
+    fi
+    ssh -i ${PEM_FILE} -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no centos@${SERVER_FQDN}
   else
     "no servers found. check .aws-config file"
   fi
