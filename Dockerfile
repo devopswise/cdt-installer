@@ -9,9 +9,12 @@ RUN pip install -U pip setuptools virtualenv
 
 RUN pip install awscli ansible==2.4.0
 
-ENV PATH="${PATH}:/"
+RUN echo 'syntax on' >> /etc/vim/vimrc
 
-COPY cdt /cdt
+COPY script/.bashrc /root/.bashrc
+COPY script/cdt /cdt
+
+ENV PATH="${PATH}:/"
 
 ENTRYPOINT ["/bin/bash","-c"]
 CMD ["sleep infinity"]

@@ -175,11 +175,14 @@ display_development_info() {
 }
 
 terminate_server() {
+  #ignore errors for next two commands
+  set +e
   aws ec2 terminate-instances --instance-ids $instanceId ${DRY_RUN} > /dev/null
   while state=$(aws ec2 describe-instances --instance-ids $instanceId --output text \
       --query 'Reservations[*].Instances[*].State.Name'); test "$state" = "shutting-down"; do
     sleep 2; echo -n '.'
   done; echo " $state"
+  set -e
 
   #aws release-address --public-ip $PUBLIC_IP
   aws ec2 detach-internet-gateway --internet-gateway-id $internetGatewayId --vpc-id $vpcId ${DRY_RUN}
