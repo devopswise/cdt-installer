@@ -8,6 +8,9 @@ if [[ -z "${CDT_GIT_URL}" ]]; then
   CDT_GIT_URL="https://github.com/devopswise/cdt.git"
 fi
 
+if [[ -z "${CDT_PLAYBOOK}" ]]; then
+  CDT_PLAYBOOK="site.yml"
+fi
 
 CDT_SOURCE_DIR=/opt/cdt/${CDT_BRANCH}
 TIMESTAMP=$(date "+%Y%m%d%H%M%S")
@@ -149,7 +152,7 @@ set_config_vars() {
 
 run_ansible_code() {
   echo ansible-playbook -i ${CDT_SOURCE_DIR}/inventories/pro \
-    ${CDT_SOURCE_DIR}/site.yml ${DEBUG}\
+    ${CDT_SOURCE_DIR}/${CDT_PLAYBOOK} ${DEBUG}\
     --vault-password-file=${CDT_SOURCE_DIR}/ansible-vault-pass
   OLD_PWD=$PWD
   echo $OLD_PWD
