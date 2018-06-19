@@ -226,7 +226,7 @@ terminate() {
     echo "This will remove target server, you can always re-launch,"
     echo "a new server but you will lose data inside it if you didn't backup"
     while true; do
-      read -p "Do you wish to terminate server?" yn
+      read -p "Do you wish to terminate server? (y/n)" yn
       case $yn in
           [Yy]* ) terminate_server; break;;
           [Nn]* ) exit;;
