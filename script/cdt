@@ -158,7 +158,7 @@ run_ansible_code() {
   echo $OLD_PWD
   cd $CDT_SOURCE_DIR
   ansible-playbook -i ${CDT_SOURCE_DIR}/inventories/pro \
-    ${CDT_SOURCE_DIR}/site.yml ${DEBUG} \
+    ${CDT_SOURCE_DIR}/${CDT_PLAYBOOK} ${DEBUG} \
     --vault-password-file=${CDT_SOURCE_DIR}/ansible-vault-pass
   cd $OLD_PWD
 }
