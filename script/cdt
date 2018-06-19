@@ -84,7 +84,7 @@ provision_server() {
   echo creating new ec2 instance
   instance_id=$(aws ec2 run-instances --image-id ami-6e28b517 --count 1 \
     --instance-type t2.micro --key-name ${KEY_PAIR} --security-group-ids $securityGroupId --subnet-id $subnetId \
-    --instance-initiated-shutdown-behavior terminate \
+    --instance-initiated-shutdown-behavior stop \
     --output text --query 'Instances[*].InstanceId')
   echo "instanceId="$instance_id >> ${CDT_SOURCE_DIR}/.aws-config
   echo A new EC2 instance is created instance_id:$instance_id
@@ -197,12 +197,13 @@ terminate_server() {
 
 print_banner() {
   
-echo '   _____ _____ _______ '
-echo '  / ____|  __ \__   __|'
-echo ' | |    | |  | | | |   '
-echo ' | |    | |  | | | |   '
-echo ' | |____| |__| | | |   '
-echo '  \_____|_____/  |_|   '
+echo "               _     _   ";
+echo "              | |   | |  ";
+echo "   ___      __| |   | |_ ";
+echo "  / __|    / _\` |   | __|";
+echo " | (__    | (_| |   | |_ ";
+echo "  \___|    \__,_|    \__|";
+echo "                         ";
                        
 }
 
