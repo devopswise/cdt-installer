@@ -19,6 +19,10 @@ if [[ -z "${AWS_DEFAULT_REGION}" ]]; then
   export AWS_DEFAULT_REGION=eu-west-1
 fi
 
+if [[ -z "${AWS_INSTANCE_TYPE}" ]]; then
+  export AWS_INSTANCE_TYPE=t2.micro
+fi
+
 set -e
 
 if [[ ! -z "${DEBUG}" ]]; then
@@ -86,7 +90,8 @@ provision_server() {
   #create ec2 instance
   echo creating new ec2 instance
   instance_id=$(aws ec2 run-instances --image-id ami-6e28b517 --count 1 \
-    --instance-type t2.micro --key-name ${KEY_PAIR} --security-group-ids $securityGroupId --subnet-id $subnetId \
+    --instance-type ${AWS_INSTANCE_TYPE} --key-name ${KEY_PAIR} --security-group-ids $securityGroupId \
+    --subnet-id $subnetId \
     --instance-initiated-shutdown-behavior stop \
     --output text --query 'Instances[*].InstanceId')
   echo "instanceId="$instance_id >> ${CDT_SOURCE_DIR}/.aws-config
