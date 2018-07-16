@@ -18,5 +18,8 @@ alias l='ls $LS_OPTIONS -lA'
 # alias mv='mv -i'
 export ANSIBLE_VAULT_PASSWORD_FILE=/opt/cdt/${CDT_BRANCH}/ansible-vault-pass
 cd /opt/cdt/${CDT_BRANCH}
+if [ -f /opt/cdt/${CDT_BRANCH}/.aws-config ]; then
+  cdt --show-post-installation-info
+fi
 echo have fun!
 

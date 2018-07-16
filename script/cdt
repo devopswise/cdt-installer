@@ -169,17 +169,25 @@ run_ansible_code() {
 }
 
 display_development_info() {
-  echo *** DONE  ***
-  echo cdt installed on ${SERVER_FQDN}, you can access tools www.${SERVER_FQDN}
+  echo ' '
+  echo cdt installed on ${SERVER_FQDN}, you can now access tools at www.${SERVER_FQDN}
   echo server will be terminated automatically in 2 hours, incase you forgot to terminate it
-  echo get into cdt-installer container first
+  echo if you want to develop or dig around, get into cdt-installer container first
   echo   docker exec -it cdt-installer bash
-  echo then, you can either sssh to your instance by typing
-  echo   ssh -i ${PEM_FILE} centos@${SERVER_FQDN}
-  echo or you can modify ansible code in $CDT_SOURCE_DIR, then apply changes by typing,
-  echo   ansible-playbook -i ${CDT_SOURCE_DIR}/inventories/pro \
-         ${CDT_SOURCE_DIR}/site.yml -vv \
-         --vault-password-file=${CDT_SOURCE_DIR}/ansible-vault-pass
+  echo ' '
+  echo ' you can always share your thoughts on info@devopswise.co.uk '
+  echo ' '
+}
+
+display_development_info2() {
+  echo ' '
+  echo cdt is installed on ${SERVER_FQDN}, you can access tools at www.${SERVER_FQDN}
+  echo in this development container, you can either ssh to your instance by typing
+  echo "  cdt --ssh"
+  echo or again, inside this container you can modify ansible code in $CDT_SOURCE_DIR
+  echo then apply changes by typing,
+  echo "  ansible-playbook -i ${CDT_SOURCE_DIR}/inventories/pro ${CDT_SOURCE_DIR}/site.yml"
+  echo ' '
 }
 
 terminate_server() {
@@ -276,6 +284,10 @@ case "$1" in
       ;;
    --ssh|-s)
       ssh_connect
+      ;;
+   --show-post-installation-info)
+      print_banner
+      display_development_info2
       ;;
    *)
       show_usage
