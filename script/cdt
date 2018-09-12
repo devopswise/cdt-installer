@@ -228,7 +228,9 @@ launch() {
   echo "Launching cdt..."
   get_sources
   generate_pem_file
-  provision_server
+  if [[ -z "${DO_NOT_PROVISION_EC2}" ]]; then
+    provision_server
+  fi
   setup_fqdn
   set_config_vars
   run_ansible_code
