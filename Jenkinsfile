@@ -1,4 +1,4 @@
-node('jenkins-python-slave') {
+node('jenkins-jnlp-slave-docker-cli') {
 
     def app
 
