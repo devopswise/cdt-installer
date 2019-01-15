@@ -143,6 +143,7 @@ get_sources() {
   else
       git -C ${CDT_SOURCE_DIR} checkout inventories/pro/hosts
       git -C ${CDT_SOURCE_DIR} checkout inventories/pro/group_vars/all/vars.yml
+      git -C ${CDT_SOURCE_DIR} pull
   fi
 }
 
