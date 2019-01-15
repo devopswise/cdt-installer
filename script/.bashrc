@@ -16,6 +16,10 @@ alias l='ls $LS_OPTIONS -lA'
 # alias rm='rm -i'
 # alias cp='cp -i'
 # alias mv='mv -i'
+
+if [[ -z "${CDT_BRANCH}" ]]; then
+  CDT_BRANCH="master"
+fi
 export ANSIBLE_VAULT_PASSWORD_FILE=/opt/cdt/${CDT_BRANCH}/ansible-vault-pass
 cd /opt/cdt/${CDT_BRANCH}
 if [ -f /opt/cdt/${CDT_BRANCH}/.aws-config ]; then
