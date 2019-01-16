@@ -20,7 +20,7 @@ if [[ -z "${AWS_DEFAULT_REGION}" ]]; then
 fi
 
 if [[ -z "${AWS_INSTANCE_TYPE}" ]]; then
-  export AWS_INSTANCE_TYPE=t2.micro
+  export AWS_INSTANCE_TYPE=t2.large
 fi
 
 set -e
