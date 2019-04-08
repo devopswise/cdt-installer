@@ -235,6 +235,7 @@ launch() {
   if [[ -z "${DO_NOT_PROVISION_EC2}" ]]; then
     generate_pem_file
     provision_server
+    sleep 15
   fi
   setup_fqdn
   set_config_vars
