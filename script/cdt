@@ -12,6 +12,10 @@ if [[ -z "${CDT_PLAYBOOK}" ]]; then
   CDT_PLAYBOOK="site.yml"
 fi
 
+if [[ -z "${CDT_SERVER_SSH_USER}" ]]; then
+  CDT_SERVER_SSH_USER="centos"
+fi
+
 CDT_SOURCE_DIR=/opt/cdt/${CDT_BRANCH}
 TIMESTAMP=$(date "+%Y%m%d%H%M%S")
 
@@ -228,8 +232,8 @@ launch() {
   print_banner
   echo "Launching cdt..."
   get_sources
-  generate_pem_file
   if [[ -z "${DO_NOT_PROVISION_EC2}" ]]; then
+    generate_pem_file
     provision_server
   fi
   setup_fqdn
@@ -264,7 +268,7 @@ ssh_connect() {
     if [ -f /root/.ssh/known_hosts ]; then
       ssh-keygen -f "/root/.ssh/known_hosts" -R ${SERVER_FQDN}
     fi
-    ssh -i ${PEM_FILE} -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no centos@${SERVER_FQDN}
+    ssh -i ${PEM_FILE} -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ${CDT_SERVER_SSH_USER}@${SERVER_FQDN}
   else
     "no servers found. check .aws-config file"
   fi
