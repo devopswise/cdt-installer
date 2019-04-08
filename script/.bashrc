@@ -21,9 +21,15 @@ if [[ -z "${CDT_BRANCH}" ]]; then
   CDT_BRANCH="master"
 fi
 export ANSIBLE_VAULT_PASSWORD_FILE=/opt/cdt/${CDT_BRANCH}/ansible-vault-pass
-cd /opt/cdt/${CDT_BRANCH}
+
+if [ -d "/opt/cdt/${CDT_BRANCH}" ]; then
+  cd /opt/cdt/${CDT_BRANCH}
+else
+  echo "Type 'cdt --launch' to install cdt for the first time"
+fi
+
 if [ -f /opt/cdt/${CDT_BRANCH}/.aws-config ]; then
   cdt --show-post-installation-info
 fi
-echo have fun!
 
+echo have fun!
