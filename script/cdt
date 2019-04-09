@@ -158,18 +158,20 @@ set_config_vars() {
            ${CDT_SOURCE_DIR}/inventories/pro/hosts
   sed -i "s@__base_domain__@${SERVER_FQDN}@g" \
            ${CDT_SOURCE_DIR}/inventories/pro/group_vars/all/vars.yml
+  sed -i "s@__base_domain__@${SERVER_FQDN}@g" \
+           ${CDT_SOURCE_DIR}/cdt-config.json
 }
 
 run_ansible_code() {
   echo ansible-playbook -i ${CDT_SOURCE_DIR}/inventories/pro \
     ${CDT_SOURCE_DIR}/${CDT_PLAYBOOK} ${DEBUG}\
-    --vault-password-file=${CDT_SOURCE_DIR}/ansible-vault-pass
+    --vault-password-file=${CDT_SOURCE_DIR}/ansible-vault-pass --extra-vars "@cdt-config.json"
   OLD_PWD=$PWD
   echo $OLD_PWD
   cd $CDT_SOURCE_DIR
   ansible-playbook -i ${CDT_SOURCE_DIR}/inventories/pro \
     ${CDT_SOURCE_DIR}/${CDT_PLAYBOOK} ${DEBUG} \
-    --vault-password-file=${CDT_SOURCE_DIR}/ansible-vault-pass
+    --vault-password-file=${CDT_SOURCE_DIR}/ansible-vault-pass --extra-vars "@cdt-config.json"
   cd $OLD_PWD
 }
 
