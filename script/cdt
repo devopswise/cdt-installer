@@ -157,8 +157,6 @@ set_config_vars() {
   sed -i "s@__dw_private_key__@${PEM_FILE}@g" \
            ${CDT_SOURCE_DIR}/inventories/pro/hosts
   sed -i "s@__base_domain__@${SERVER_FQDN}@g" \
-           ${CDT_SOURCE_DIR}/inventories/pro/group_vars/all/vars.yml
-  sed -i "s@__base_domain__@${SERVER_FQDN}@g" \
            ${CDT_SOURCE_DIR}/cdt-config.json
 }
 
