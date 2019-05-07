@@ -1,7 +1,7 @@
 FROM debian:jessie
 
 RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends \
-       python-pip git net-tools ssh vim pwgen apache2-utils netcat \
+       python-pip git net-tools ssh vim pwgen apache2-utils netcat ansible-lint \
        && apt-get clean \
        && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
