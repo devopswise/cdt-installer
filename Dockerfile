@@ -1,4 +1,26 @@
-FROM debian:jessie
+#FROM debian:jessie
+ARG NODE_VERSION=10
+FROM node:${NODE_VERSION}-stretch
+
+RUN apt-get update \
+    && apt-get install -y python python-dev python-pip \
+    && apt-get clean && rm -rf /var/cache/apt/* && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/*
+
+RUN pip install \
+    python-language-server \
+    flake8 \
+    autopep8
+
+ARG version=latest
+
+WORKDIR /home/theia
+ADD script/package.json ./package.json
+ARG GITHUB_TOKEN
+RUN yarn --cache-folder ./ycache && rm -rf ./ycache
+RUN yarn theia build
+EXPOSE 3000
+ENV SHELL /bin/bash
+#ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
 
 RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends \
        python-pip git net-tools ssh vim pwgen apache2-utils netcat \
@@ -18,4 +40,4 @@ COPY script/cdt /cdt
 ENV PATH="${PATH}:/"
 
 ENTRYPOINT ["/bin/bash","-c"]
-CMD ["sleep infinity"]
+CMD [ "yarn theia start /opt/cdt --hostname=0.0.0.0" ]
