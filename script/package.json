@@ -12,7 +12,8 @@
         "@theia/python": "latest",
         "@theia/search-in-workspace": "latest",
         "@theia/terminal": "latest",
-        "@theia/textmate-grammars": "latest"
+        "@theia/textmate-grammars": "latest",
+        "@theia/yaml" : "latest"
     },
     "devDependencies": {
         "@theia/cli": "latest"
